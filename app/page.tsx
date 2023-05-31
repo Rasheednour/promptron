@@ -1,3 +1,5 @@
+import Feed from "@components/Feed";
+
 type Props = {};
 
 const Home = (props: Props) => {
@@ -13,6 +15,7 @@ const Home = (props: Props) => {
         prompts to be used in a variety of AI products like ChatGPT and
         Midjourney
       </p>
+      <Feed />
     </section>
   );
 };
