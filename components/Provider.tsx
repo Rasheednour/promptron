@@ -7,3 +7,5 @@ const Provider = (props: Props) => {
     <div>Provider</div>
   )
 }
+
+export default Provider

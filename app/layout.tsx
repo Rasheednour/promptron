@@ -1,5 +1,7 @@
 import "@styles/globals.css";
 import { Children, ReactNode } from "react";
+import Nav from "@components/Nav";
+import Provider from "@components/Provider";
 
 export const metadata = {
   title: "PromptyDumpty",
@@ -17,7 +19,11 @@ const RootLayout = (props: Props) => {
         <div className="main">
           <div className="gradient" />
         </div>
-        <main className="app">{props.children}</main>
+        
+        <main className="app">
+          <Nav />
+          {props.children}
+          </main>
       </body>
     </html>
   );
