@@ -1,5 +1,5 @@
-import "styles/globals.css";
-import { Children } from "react";
+import "@styles/globals.css";
+import { Children, ReactNode } from "react";
 
 export const metadata = {
   title: "PromptyDumpty",
@@ -7,7 +7,7 @@ export const metadata = {
 };
 
 type Props = {
-  children: React.ReactNode;
+    children: ReactNode;
 };
 
 const RootLayout = (props: Props) => {
