@@ -9,21 +9,23 @@ export const metadata = {
 };
 
 type Props = {
-    children: ReactNode;
+  children: ReactNode;
 };
 
 const RootLayout = (props: Props) => {
   return (
     <html lang="en">
       <body>
-        <div className="main">
-          <div className="gradient" />
-        </div>
-        
-        <main className="app">
-          <Nav />
-          {props.children}
+        <Provider>
+          <div className="main">
+            <div className="gradient" />
+          </div>
+
+          <main className="app">
+            <Nav />
+            {props.children}
           </main>
+        </Provider>
       </body>
     </html>
   );
