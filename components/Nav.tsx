@@ -25,6 +25,7 @@ const Nav = (props: Props) => {
   const [providers, setProviders] = useState<Record<string, Provider> | null>(
     null
   );
+  const [activeDropdown, setAcvtiveDropdown] = useState<Boolean>(false);
 
   useEffect(() => {
     const setProvider = async () => {
@@ -69,6 +70,9 @@ const Nav = (props: Props) => {
         />
         <p className="logo_text">PromptyDumpty</p>
       </Link>
+
+      {/* Desktop Navigation */}
+
       <div className="sm:flex hidden">
         {userLoggedIn ? (
           <div className="flex gap-3 md:gap-5">
@@ -91,6 +95,64 @@ const Nav = (props: Props) => {
                 alt="profile picture"
               />
             </Link>
+          </div>
+        ) : (
+          <>
+            {providers &&
+              Object.values(providers).map((provider) => (
+                <button
+                  type="button"
+                  key={provider.name}
+                  onClick={(e) => handleSignIn(e, provider.name)}
+                >
+                  Sign In
+                </button>
+              ))}
+          </>
+        )}
+      </div>
+
+      {/* Mobile Navigation */}
+
+      <div className="sm:hidden flex relative">
+        {userLoggedIn ? (
+          <div className="flex">
+            <Image
+              src="/assets/images/logo.svg"
+              width={37}
+              height={37}
+              className="rounded-full"
+              alt="profile picture"
+              onClick={() => setAcvtiveDropdown((prev) => !prev)}
+            />
+            {activeDropdown && (
+              <div className="dropdown">
+                <Link
+                  href="/profile"
+                  className="dropdown_link"
+                  onClick={() => setAcvtiveDropdown(false)}
+                >
+                  My Profile
+                </Link>
+                <Link
+                  href="/create-prompt"
+                  className="dropdown_link"
+                  onClick={() => setAcvtiveDropdown(false)}
+                >
+                  Create Prompt
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAcvtiveDropdown(false);
+                    signOut();
+                  }}
+                  className="mt-5 w-full black_btn"
+                >
+                  Sign Out
+                </button>
+              </div>
+            )}
           </div>
         ) : (
           <>
