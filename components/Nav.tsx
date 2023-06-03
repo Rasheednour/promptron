@@ -20,7 +20,7 @@ type Provider = {
 
 const Nav = (props: Props) => {
   // keep track of user login status
-  const userLoggedIn: boolean = true;
+  const { data: session } = useSession();
 
   const [providers, setProviders] = useState<Record<string, Provider> | null>(
     null
@@ -74,7 +74,7 @@ const Nav = (props: Props) => {
       {/* Desktop Navigation */}
 
       <div className="sm:flex hidden">
-        {userLoggedIn ? (
+        {session?.user ? (
           <div className="flex gap-3 md:gap-5">
             <Link href="/create-prompt" className="black_btn">
               Create Post
@@ -115,7 +115,7 @@ const Nav = (props: Props) => {
       {/* Mobile Navigation */}
 
       <div className="sm:hidden flex relative">
-        {userLoggedIn ? (
+        {session?.user ? (
           <div className="flex">
             <Image
               src="/assets/images/logo.svg"
