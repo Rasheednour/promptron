@@ -88,7 +88,7 @@ const Nav = (props: Props) => {
             </button>
             <Link href="/profile">
               <Image
-                src="/assets/images/logo.svg"
+                src={session?.user.image as string}
                 width={37}
                 height={37}
                 className="rounded-full"
@@ -104,6 +104,7 @@ const Nav = (props: Props) => {
                   type="button"
                   key={provider.name}
                   onClick={(e) => handleSignIn(e, provider.name)}
+                  className="outline_btn"
                 >
                   Sign In
                 </button>
@@ -118,7 +119,7 @@ const Nav = (props: Props) => {
         {session?.user ? (
           <div className="flex">
             <Image
-              src="/assets/images/logo.svg"
+              src={session?.user.image as string}
               width={37}
               height={37}
               className="rounded-full"
@@ -161,6 +162,7 @@ const Nav = (props: Props) => {
                 <button
                   type="button"
                   key={provider.name}
+                  className="mt-5 w-full black_btn"
                   onClick={(e) => handleSignIn(e, provider.name)}
                 >
                   Sign In
