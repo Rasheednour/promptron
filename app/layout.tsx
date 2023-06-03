@@ -2,6 +2,8 @@ import "@styles/globals.css";
 import { Children, ReactNode } from "react";
 import Nav from "@components/Nav";
 import Provider from "@components/Provider";
+import dotenv from 'dotenv';
+dotenv.config();
 
 export const metadata = {
   title: "PromptyDumpty",
