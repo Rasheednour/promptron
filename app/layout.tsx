@@ -1,7 +1,8 @@
 import "@styles/globals.css";
-import { Children, ReactNode } from "react";
 import Nav from "@components/Nav";
 import Provider from "@components/Provider";
+import { ReactNode } from 'react';
+import { Session } from 'next-auth';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -10,22 +11,24 @@ export const metadata = {
   description: "Find & Share AI Prompts",
 };
 
-type Props = {
+interface RootLayoutProps {
   children: ReactNode;
-};
+  session: Session;
 
-const RootLayout = (props: Props) => {
+}
+
+const RootLayout = ({ children, session }: RootLayoutProps) => {
   return (
     <html lang="en">
       <body>
-        <Provider>
+        <Provider session={session}>
           <div className="main">
             <div className="gradient" />
           </div>
 
           <main className="app">
             <Nav />
-            {props.children}
+            {children}
           </main>
         </Provider>
       </body>
