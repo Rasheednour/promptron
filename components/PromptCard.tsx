@@ -24,6 +24,11 @@ type Props = {
 
 const PromptCard = (props: Props) => {
   const [copied, setCopied] = useState("");
+  const handleCopy = () => {
+    setCopied(props.prompt.prompt);
+    navigator.clipboard.writeText(props.prompt.prompt);
+    setTimeout(() => setCopied(""), 3000);
+  }
   return (
     <div className="prompt_card">
       <div className="flex justify-between items-start gap-5">
@@ -44,7 +49,7 @@ const PromptCard = (props: Props) => {
             </p>
           </div>
         </div>
-        <div className="copy_btn" onClick={() => {}}>
+        <div className="copy_btn" onClick={handleCopy}>
           <Image
             src={
               copied === props.prompt.prompt
