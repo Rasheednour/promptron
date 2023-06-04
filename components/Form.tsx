@@ -38,6 +38,29 @@ const Form = (props: Props) => {
             required
             className="form_textarea"/>
           </label>
+          <label>
+            <span className="font-satoshi font-semibold text-base text-gray-700">
+              Tag
+              <span>(#product, #webdevelopment, #idea)</span>
+            </span>
+            <input
+            value={props.post.tag}
+            onChange={(e) => props.setPost({
+              ...props.post, tag: e.target.value
+            })}
+            placeholder="#tag"
+            required
+            className="form_input"/>
+          </label>
+          <div className="flex-end mx-3 mb-5 gap-4">
+            <Link href="/" className="text-gray-500 text-sm">
+              Cancel
+            </Link>
+            <button type="submit" disabled={props.submitting} className="px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white">
+              {props.submitting ? `${props.type}...` : props.type}
+
+            </button>
+          </div>
 
         </form>
       </h1>

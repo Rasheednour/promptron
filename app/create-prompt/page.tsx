@@ -13,8 +13,10 @@ const CreatePrompt = (props: Props) => {
         prompt: '',
         tag: '',
     });
-    const createPrompt = async (e:any) => {
-        return e;
+    const createPrompt = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+       
+
     }
   return (
     <Form
