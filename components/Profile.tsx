@@ -17,8 +17,8 @@ const Profile = (props: Props) => {
         <PromptCard
           key={prompt._id}
           prompt={prompt}
-          handleEdit={() => handleEdit && handleEdit(prompt)}
-          handleDelete={() => handleDelete && handleDelete(prompt)}
+          handleEdit={() => props.handleEdit && props.handleEdit(prompt)}
+          handleDelete={() => props.handleDelete && props.handleDelete(prompt)}
         />
       ))}
     </div>
