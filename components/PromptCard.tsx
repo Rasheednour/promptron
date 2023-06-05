@@ -28,7 +28,7 @@ const PromptCard = (props: Props) => {
     setCopied(props.prompt.prompt);
     navigator.clipboard.writeText(props.prompt.prompt);
     setTimeout(() => setCopied(""), 3000);
-  }
+  };
   return (
     <div className="prompt_card">
       <div className="flex justify-between items-start gap-5">
@@ -62,8 +62,15 @@ const PromptCard = (props: Props) => {
           />
         </div>
       </div>
-      <p className="my-4 font-satoshi text-sm text-gray-700">{props.prompt.prompt}</p>
-      <p className="font-inter text-sm blue_gradient cursor-pointer" onClick={()=> handleTagClick && handleTagClick(props.prompt.tag)}>{props.prompt.tag}</p>
+      <p className="my-4 font-satoshi text-sm text-gray-700">
+        {props.prompt.prompt}
+      </p>
+      <p
+        className="font-inter text-sm blue_gradient cursor-pointer"
+        onClick={() => handleTagClick && handleTagClick(props.prompt.tag)}
+      >
+        {props.prompt.tag}
+      </p>
     </div>
   );
 };
