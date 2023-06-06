@@ -1,5 +1,7 @@
-import React, { SetStateAction } from "react";
+"use client";
+import React, { SetStateAction, useState } from "react";
 import Link from "next/link";
+import ToggleSwitch from "@components/ToggleSwitch";
 
 type Post = {
   prompt: string;
@@ -14,14 +16,16 @@ type Props = {
 };
 
 const Form = (props: Props) => {
+  const [platform, setPlatform] = useState("chatGPT");
   return (
     <section className="w-full max-w-full flex-start flex-col">
       <h1 className="head_text text-left">
         <span className="blue_gradient">{props.type} Post</span>
         <p className="desc text-left max-w-md">
           {props.type} and share amazing prompts with the world, and let your
-          imagination run wild with any AI-powered platform
+          imagination run wild with the AI-powered platform of your choice
         </p>
+        <ToggleSwitch setPlatform={setPlatform}/>
         <form
         onSubmit={props.handleSubmit}
         className="mt-10 w-full max-w-2xl flex flex-col gap-7 glassmorphism">
