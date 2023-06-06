@@ -8,7 +8,9 @@ const ToggleSwitch = (props: Props) => {
   const handleToggle = (e:React.ChangeEvent<HTMLInputElement>) => {
     if(e.target.checked){
         props.setPlatform("midjourney");
-    } 
+    } else {
+        props.setPlatform("chatGPT");
+    }
   };
   return (
     <label className="inline-flex items-center p-2 rounded-md cursor-pointer dark:text-gray-800">
