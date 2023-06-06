@@ -19,18 +19,18 @@ const UserProfile = (props: Props) => {
             fetchPosts();
         }
         
-      }, []);
+      }, [session]);
 
-    const handleEdit = (post) => {
-      router.push(`/update-prompt?id=${post._id}`)
+    const handleEdit = (prompt: Prompt) => {
+      router.push(`/update-prompt?id=${prompt._id}`)
     }
-    const handleDelete = async (post) => {
+    const handleDelete = async (prompt: Prompt) => {
       const hasConfirmed = confirm("Are you sure you want to delete this prompt?");
 
       if(hasConfirmed) {
         try {
-          await fetch(`/api/prompt/${post._id.toString()}`, {method: 'DELETE'});
-          const filteredPosts = prompts.filter((p) => p._id !== post._id);
+          await fetch(`/api/prompt/${prompt._id.toString()}`, {method: 'DELETE'});
+          const filteredPosts = prompts.filter((p: Prompt) => p._id !== prompt._id);
           setPrompts(filteredPosts);
         } catch (error) {
           console.log(error);

@@ -2,24 +2,11 @@ import { useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
-import { Schema } from "mongoose";
 
-type Creator = {
-  email: string;
-  username: string;
-  image: string;
-};
-
-type Prompt = {
-  creator: Creator;
-  prompt: string;
-  tag: string;
-};
 type Props = {
   prompt: Prompt;
-  handleTagClick: string;
-  handleEdit: string;
-  handleDelete: string;
+  handleEdit: (prompt: Prompt) => void;
+  handleDelete: (prompt: Prompt) => void;
 };
 
 const PromptCard = (props: Props) => {
@@ -32,6 +19,9 @@ const PromptCard = (props: Props) => {
     navigator.clipboard.writeText(props.prompt.prompt);
     setTimeout(() => setCopied(""), 3000);
   };
+  const handleTagClick = (tag: string) => {
+    alert(`clicked on ${tag}`);
+  }
   return (
     <div className="prompt_card">
       <div className="flex justify-between items-start gap-5">
@@ -70,22 +60,22 @@ const PromptCard = (props: Props) => {
       </p>
       <p
         className="font-inter text-sm blue_gradient cursor-pointer"
-        onClick={() => handleTagClick && handleTagClick(props.prompt.tag)}
+        onClick={() => handleTagClick(props.prompt.tag)}
       >
         {props.prompt.tag}
       </p>
-      {session?.user.id === props.prompt.creator._id &&
+      {session?.user.id === props.prompt.creator._id.toString() &&
         pathName === "/profile" && (
           <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
             <p
               className="font-inter text-sm green_gradient cursor-pointer"
-              onClick={props.handleEdit}
+              onClick={()=>props.handleEdit(props.prompt)}
             >
               Edit
             </p>
             <p
               className="font-inter text-sm orange_gradient cursor-pointer"
-              onClick={props.handleDelete}
+              onClick={()=>props.handleDelete(props.prompt)}
             >
               Delete
             </p>

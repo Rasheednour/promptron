@@ -2,9 +2,9 @@ import PromptCard from "./PromptCard"
 type Props = {
   name:string,
   desc: string,
-  data: string[],
-  handleEdit: () => void,
-  handleDelete: () => void
+  data: Prompt[],
+  handleEdit: (prompt: Prompt) => void,
+  handleDelete: (prompt:Prompt) => void
 }
 
 const Profile = (props: Props) => {
@@ -15,7 +15,7 @@ const Profile = (props: Props) => {
     <div className="mt-10 prompt_layout">
       {props.data.map((prompt) => (
         <PromptCard
-          key={prompt._id}
+          key={prompt._id.toString()}
           prompt={prompt}
           handleEdit={() => props.handleEdit && props.handleEdit(prompt)}
           handleDelete={() => props.handleDelete && props.handleDelete(prompt)}
