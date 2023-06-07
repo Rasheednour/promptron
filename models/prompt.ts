@@ -12,6 +12,17 @@ const PromptSchema = new Schema({
     tag: {
         type: String,
         required: [true, 'Tag is required!'],
+    },
+    platform: {
+        type: String,
+        enum: {
+            values: ['chatGPT', 'midjourney'],
+            message: '{VALUE} is not supported'
+        },
+        required: [true, 'Platform is required!']
+    },
+    imageURL: {
+        type: String
     }
 });
 

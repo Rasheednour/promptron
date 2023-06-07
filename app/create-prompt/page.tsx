@@ -25,8 +25,11 @@ const CreatePrompt = (props: Props) => {
     setSubmitting(true);
 
     try {
+      // detect AI platform based on prompt type
+      let platform;
       // check if an image file is sent back in the form
       if (imageFile) {
+        platform = "midjourney";
         // specify the image file name and storage folder location
         console.log(imageFile);
         const imageRef = ref(
@@ -39,19 +42,34 @@ const CreatePrompt = (props: Props) => {
         const downloadURL = await getDownloadURL(imageRef);
         console.log("the image URL is", downloadURL);
         setImageURL(downloadURL);
-      }
-      const response = await fetch("/api/prompt/new", {
-        method: "POST",
-        body: JSON.stringify({
-          prompt: post.prompt,
-          userId: session?.user.id,
-          tag: post.tag,
-          imageURL: imageURL,
-        }),
-      });
-
-      if (response.ok) {
-        router.push("/");
+        const response = await fetch("/api/prompt/new", {
+          method: "POST",
+          body: JSON.stringify({
+            prompt: post.prompt,
+            userId: session?.user.id,
+            tag: post.tag,
+            platform: platform,
+            imageURL: downloadURL,
+          }),
+        });
+        if (response.ok) {
+          router.push("/");
+        }
+      } else {
+        platform = "chatGPT";
+        const response = await fetch("/api/prompt/new", {
+          method: "POST",
+          body: JSON.stringify({
+            prompt: post.prompt,
+            userId: session?.user.id,
+            tag: post.tag,
+            platform: platform,
+            imageURL: "",
+          }),
+        });
+        if (response.ok) {
+          router.push("/");
+        }
       }
     } catch (error) {
       console.log(error);

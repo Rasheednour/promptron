@@ -1,7 +1,8 @@
 import { connectToDB } from "@utils/database";
 import Prompt from "@models/prompt";
+import { NextApiRequest } from "next";
 
-export const GET = async (request, { params }) => {
+export const GET = async (request:NextApiRequest, { params }: {params: {[id:string]:string}} ) => {
   try {
     await connectToDB();
     const prompts = await Prompt.find({creator: params.id}).populate("creator");

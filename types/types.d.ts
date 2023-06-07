@@ -10,6 +10,8 @@ declare type Prompt = {
   prompt: string;
   tag: string;
   _id: import('mongoose').Schema.Types.ObjectId;
+  platform: string;
+  imageURL: string;
 };
 
 declare "uuid"
