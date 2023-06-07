@@ -64,7 +64,10 @@ const PromptCard = (props: Props) => {
       >
         {props.prompt.tag}
       </p>
-      {/* <Image src={"https://images.pexels.com/photos/3118541/pexels-photo-3118541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"} width={400} height={400} alt="midjourney user image"/> */}
+      {props.prompt.imageURL && (
+        <Image src={props.prompt.imageURL} width={400} height={400} alt="midjourney user image"/>
+      )}
+      
       {session?.user.id === props.prompt.creator._id.toString() &&
         pathName === "/profile" && (
           <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
