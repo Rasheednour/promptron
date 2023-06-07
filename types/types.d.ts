@@ -15,3 +15,5 @@ declare type Prompt = {
 };
 
 declare "uuid"
+
+declare type Platform = "chatGPT" | "midjourney"

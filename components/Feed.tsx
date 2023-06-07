@@ -2,34 +2,63 @@
 import { useState, useEffect } from "react";
 import PromptCard from "./PromptCard";
 import ToggleSwitch from "./ToggleSwitch";
-const PromptCardList = ({ data, handleTagClick }) => {
+type CardListProps = {
+  data: Prompt[];
+  handleTagClick: () => void;
+};
+type PlatformPrompts = {
+  chatGPT: Prompt[];
+  midjourney: Prompt[];
+};
+const PromptCardList = (props: CardListProps) => {
   return (
     <div className="mt-16 prompt_layout">
-      {data.map((prompt) => (
+      {props.data.map((prompt: Prompt) => (
         <PromptCard
-          key={prompt._id}
+          key={prompt._id.toString()}
           prompt={prompt}
-          handleTagClick={handleTagClick}
+          handleTagClick={props.handleTagClick}
         />
       ))}
     </div>
   );
 };
 type Props = {};
-
 const Feed = (props: Props) => {
-  const [searchText, setSearchText] = useState("");
-  const [prompts, setPrompts] = useState([]);
+  const [searchText, setSearchText] = useState<string>("");
+  // store only prompts that will shows on the home feed
+  const [feedPrompts, setFeedPrompts] = useState<Prompt[]>([]);
+  // store all Prompts
+  const [allPrompts, setAllPromps] = useState<PlatformPrompts>();
+  // store AI platform
+  const [platform, setPlatform] = useState<Platform>("chatGPT");
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {};
 
+  // if a platform changes due to the user clicking on the toggle
+  // platform button in the home page, filter the prompt feed
+  useEffect(() => {
+    if (allPrompts) {
+      setFeedPrompts(allPrompts[platform]);
+    }
+  }, [platform]);
   useEffect(() => {
     const fetchPosts = async () => {
       const response = await fetch("/api/prompt");
-      const data = await response.json();
-      setPrompts(data);
+      const data: Prompt[] = await response.json();
+      // prefilter the data into platform specific prompts
+      const gptPrompts = data.filter((prompt) => prompt.platform == "chatGPT");
+      const mjPrompts = data.filter(
+        (prompt) => prompt.platform == "midjourney"
+      );
+      const prompts = { chatGPT: gptPrompts, midjourney: mjPrompts };
+      setAllPromps(prompts);
+      setFeedPrompts(prompts[platform]);
     };
     fetchPosts();
   }, []);
+
+  // function to filter prompts based on clicked tag
+  const handleTagClick = () => {};
   return (
     <section className="feed">
       <form className="relative w-full flex-center">
@@ -42,8 +71,10 @@ const Feed = (props: Props) => {
           className="search_input peer"
         />
       </form>
-      {/* <ToggleSwitch/> */}
-      <PromptCardList data={prompts} handleTagClick={() => {}} />
+      <ToggleSwitch setPlatform={setPlatform} />
+      {feedPrompts && (
+        <PromptCardList data={feedPrompts} handleTagClick={handleTagClick} />
+      )}
     </section>
   );
 };

@@ -80,7 +80,7 @@ const Form = (props: Props) => {
             <Link href="/" className="text-gray-500 text-sm">
               Cancel
             </Link>
-            <button type="submit" disabled={props.submitting} className="px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white">
+            <button type="submit" disabled={props.submitting} className="px-5 py-1.5 text-sm bg-blue-500 rounded-full text-white">
               {props.submitting ? `${props.type}...` : props.type}
 
             </button>

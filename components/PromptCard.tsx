@@ -5,8 +5,9 @@ import { usePathname, useRouter } from "next/navigation";
 
 type Props = {
   prompt: Prompt;
-  handleEdit: (prompt: Prompt) => void;
-  handleDelete: (prompt: Prompt) => void;
+  handleEdit?: (prompt: Prompt) => void;
+  handleDelete?: (prompt: Prompt) => void;
+  handleTagClick: () => void;
 };
 
 const PromptCard = (props: Props) => {
@@ -21,7 +22,7 @@ const PromptCard = (props: Props) => {
   };
   const handleTagClick = (tag: string) => {
     alert(`clicked on ${tag}`);
-  }
+  };
   return (
     <div className="prompt_card">
       <div className="flex justify-between items-start gap-5">
@@ -65,21 +66,34 @@ const PromptCard = (props: Props) => {
         {props.prompt.tag}
       </p>
       {props.prompt.imageURL && (
-        <Image src={props.prompt.imageURL} width={400} height={400} alt="midjourney user image"/>
+        <Image
+          src={props.prompt.imageURL}
+          width={400}
+          height={400}
+          alt="midjourney user image"
+        />
       )}
-      
+
       {session?.user.id === props.prompt.creator._id.toString() &&
         pathName === "/profile" && (
           <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
             <p
               className="font-inter text-sm green_gradient cursor-pointer"
-              onClick={()=>props.handleEdit(props.prompt)}
+              onClick={() => {
+                if (props.handleEdit) {
+                  props.handleEdit(props.prompt);
+                }
+              }}
             >
               Edit
             </p>
             <p
               className="font-inter text-sm orange_gradient cursor-pointer"
-              onClick={()=>props.handleDelete(props.prompt)}
+              onClick={() => {
+                if (props.handleDelete) {
+                  props.handleDelete(props.prompt);
+                }
+              }}
             >
               Delete
             </p>

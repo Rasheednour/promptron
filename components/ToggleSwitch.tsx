@@ -1,7 +1,7 @@
 import React from "react";
 
 type Props = {
-    setPlatform: (platform: string) => void
+    setPlatform: (platform: Platform) => void
 };
 
 const ToggleSwitch = (props: Props) => {
