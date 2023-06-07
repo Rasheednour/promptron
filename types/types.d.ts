@@ -11,3 +11,5 @@ declare type Prompt = {
   tag: string;
   _id: import('mongoose').Schema.Types.ObjectId;
 };
+
+declare "uuid"

@@ -8,7 +8,7 @@ const Home = (props: Props) => {
       <h1 className="head_text text-center">
         Find & Share
         <br className="max-md:hidden" />
-        <span className="orange_gradient text-center">AI-Powered Prompts</span>
+        <span className="blue_gradient text-center">AI-Powered Prompts</span>
       </h1>
       <p className="desc text-center">
         PromptyDumpty is an open community for sharing and discovering AI

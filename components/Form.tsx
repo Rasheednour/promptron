@@ -14,6 +14,7 @@ type Props = {
   setPost: any;
   submitting: boolean;
   handleSubmit: any;
+  setImageFile: (imageFile: File) => void;
 };
 
 const Form = (props: Props) => {
@@ -22,6 +23,7 @@ const Form = (props: Props) => {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
     setImage(URL.createObjectURL(e.target.files[0]));
+    props.setImageFile(e.target.files[0])
   }
   // reset image whenever platform is changed
   useEffect(() => {
@@ -70,7 +72,7 @@ const Form = (props: Props) => {
           {platform === "midjourney" && (
             <label>
             <span className="font-satoshi font-semibold text-base text-gray-700">Share Your Resulting Image</span>
-            <input type="file" accept="image/*" className="form_input" onChange={(e) => {handleImageChange(e)}}></input>
+            <input type="file" accept="image/*" className="form_input" onChange={(e) => {handleImageChange(e)}} required></input>
             {image && (<Image src={image} width={200} height={200} alt="midjourney user image"/>)}
           </label>
           )}
