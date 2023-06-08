@@ -10,9 +10,12 @@ type Props = {
   handleTagClick: () => void;
 };
 
+
+
 const PromptCard = (props: Props) => {
   const [copied, setCopied] = useState("");
   const [liked, setLiked] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
@@ -25,11 +28,20 @@ const PromptCard = (props: Props) => {
     alert(`clicked on ${tag}`);
   };
 
+  // handle user clicking on the like prompt button
   const handleLike = () => {
-    setLiked(true);
+    setLiked(!liked);
   }
+
+  // handel user clicking on a text prompt card to enlarge it
+  const handleTextPromptClick = () => {
+    setModalOpen(true);
+  }
+
+
   return (
-    <div className={"prompt_card " + (props.prompt.imageURL? 'h-fit' : 'h-52')} >
+    
+    <div className={"prompt_card hover:cursor-pointer hover:bg-gray-100 " + (props.prompt.imageURL? 'h-fit' : 'h-52')} onClick={handleTextPromptClick}>
       <div className="flex justify-between items-start gap-2 drop-shadow-md">
         <div className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
           <Image
@@ -40,7 +52,7 @@ const PromptCard = (props: Props) => {
             className="rounded-full object-contain "
           />
           <div className="flex flex-col">
-            <h3 className="font-satoshi font-semibold text-gray-900 text-sm " >
+            <h3 className="font-satoshi font-semibold text-gray-900 text-sm hover:underline " >
               {props.prompt.creator.username}
             </h3>
             {/* <p className="font-inter text-sm text-grey-500">
@@ -48,7 +60,7 @@ const PromptCard = (props: Props) => {
             </p> */}
           </div>
         </div>
-        <div className="copy_btn" onClick={handleLike}>
+        <div className="copy_btn hover:bg-gray-300" onClick={handleLike}>
           <Image
             src={
               liked
@@ -60,7 +72,7 @@ const PromptCard = (props: Props) => {
             alt="copy-image"
           />
         </div>
-        <div className="copy_btn" onClick={handleCopy}>
+        <div className="copy_btn  hover:bg-gray-300" onClick={handleCopy}>
           <Image
             src={
               copied === props.prompt.prompt
@@ -81,15 +93,15 @@ const PromptCard = (props: Props) => {
           alt="midjourney user image"
           className="mt-3 mb-3"
         />
-      ) : (<p className="my-4 font-satoshi text-sm text-gray-700 line-clamp-3">
+      ) : (<p className="my-4 font-satoshi text-sm text-gray-700 line-clamp-3 select-none">
       {props.prompt.prompt}
     </p>)}
       
       <p
-        className="font-inter text-sm blue_gradient cursor-pointer"
+        className="font-inter text-sm text-blue-600 cursor-pointer hover:underline select-none inline-block"
         onClick={() => handleTagClick(props.prompt.tag)}
       >
-        {props.prompt.tag}
+        #{props.prompt.tag}
       </p>
       
 

@@ -57,20 +57,20 @@ const Nav = (props: Props) => {
     }
   };
 
+  
   return (
     <nav className="flex-between w-full mb-16 pt-3">
       <Link href="/" className="flex  flex-center">
         <Image
-          src={"/assets/images/logo.svg"}
-          width={60}
-          height={60}
+          src={"/assets/images/logo2.svg"}
+          width={80}
+          height={80}
           alt="PromptyDumpy logo"
           className="object-contain"
         />
         
         <p className="logo_text">PromptyDumpty</p>
       </Link>
-
       {/* Desktop Navigation */}
 
       <div className="sm:flex hidden">
