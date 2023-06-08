@@ -12,7 +12,7 @@ type PlatformPrompts = {
 };
 const PromptCardList = (props: CardListProps) => {
   return (
-    <div className="mt-16 prompt_layout">
+    <div className=" prompt_layout">
       {props.data.map((prompt: Prompt) => (
         <PromptCard
           key={prompt._id.toString()}

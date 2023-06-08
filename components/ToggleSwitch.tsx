@@ -13,7 +13,7 @@ const ToggleSwitch = (props: Props) => {
     }
   };
   return (
-    <label className="inline-flex items-center p-2 rounded-md cursor-pointer dark:text-gray-800">
+    <label className="inline-flex items-center p-2 rounded-md cursor-pointer dark:text-gray-800 mt-4">
       <input
         id="Toggle3"
         type="checkbox"
