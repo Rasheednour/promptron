@@ -12,6 +12,7 @@ type Props = {
 
 const PromptCard = (props: Props) => {
   const [copied, setCopied] = useState("");
+  const [liked, setLiked] = useState(false);
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
@@ -23,9 +24,13 @@ const PromptCard = (props: Props) => {
   const handleTagClick = (tag: string) => {
     alert(`clicked on ${tag}`);
   };
+
+  const handleLike = () => {
+    setLiked(true);
+  }
   return (
     <div className={"prompt_card " + (props.prompt.imageURL? 'h-fit' : 'h-52')} >
-      <div className="flex justify-between items-start gap-5 drop-shadow-md">
+      <div className="flex justify-between items-start gap-2 drop-shadow-md">
         <div className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
           <Image
             src={props.prompt.creator.image}
@@ -43,19 +48,19 @@ const PromptCard = (props: Props) => {
             </p> */}
           </div>
         </div>
-        <div className="copy_btn" onClick={handleCopy}>
+        <div className="copy_btn" onClick={handleLike}>
           <Image
             src={
-              copied === props.prompt.prompt
-                ? "/assets/icons/tick.svg"
-                : "/assets/icons/copy.svg"
+              liked
+                ? "/assets/icons/heart-filled.svg"
+                : "/assets/icons/heart-empty.svg"
             }
             width={12}
             height={12}
             alt="copy-image"
           />
         </div>
-        <div className="copy_btn">
+        <div className="copy_btn" onClick={handleCopy}>
           <Image
             src={
               copied === props.prompt.prompt
@@ -74,6 +79,7 @@ const PromptCard = (props: Props) => {
           width={400}
           height={400}
           alt="midjourney user image"
+          className="mt-3 mb-3"
         />
       ) : (<p className="my-4 font-satoshi text-sm text-gray-700 line-clamp-3">
       {props.prompt.prompt}
