@@ -1,8 +1,9 @@
 import { connectToDB } from "@utils/database";
 import Prompt from "@models/prompt";
+import { NextRequest } from "next/server";
 // GET (read prompt)
 
-export const GET = async (request, { params }) => {
+export const GET = async (request:Request|NextRequest, { params }) => {
   try {
     await connectToDB();
     const prompt = await Prompt.findById(params.id).populate("creator");
@@ -18,7 +19,7 @@ export const GET = async (request, { params }) => {
 };
 
 // PATCH (update prompt)
-export const PATCH = async (request, { params }) => {
+export const PATCH = async (request:Request|NextRequest, { params }) => {
   const { prompt, tag } = await request.json();
 
   try {
@@ -39,7 +40,7 @@ export const PATCH = async (request, { params }) => {
   }
 };
 // DELETE (delete prompt)
-export const DELETE = async (request, { params }) => {
+export const DELETE = async (request:Request|NextRequest, { params }) => {
   try {
     await connectToDB();
 
