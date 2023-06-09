@@ -119,8 +119,9 @@ const PromptCard = (props: Props) => {
           <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
             <p
               className="font-inter text-sm green_gradient cursor-pointer"
-              onClick={() => {
+              onClick={(e) => {
                 if (props.handleEdit) {
+                  e.stopPropagation();
                   props.handleEdit(props.prompt);
                 }
               }}
@@ -129,8 +130,9 @@ const PromptCard = (props: Props) => {
             </p>
             <p
               className="font-inter text-sm orange_gradient cursor-pointer"
-              onClick={() => {
+              onClick={(e) => {
                 if (props.handleDelete) {
+                  e.stopPropagation();
                   props.handleDelete(props.prompt);
                 }
               }}
