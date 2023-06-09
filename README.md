@@ -21,6 +21,7 @@ PromptyDumpty is a web application designed to inspire creativity and facilitate
 * [Next-Auth](https://next-auth.js.org/) - Complete open source authentication solution for Next.js applications.
 * [MongoDB](https://www.mongodb.com/) / [Mongoose](https://mongoosejs.com/) - Database management.
 * [Firebase Storage](https://firebase.google.com/products/storage) - For storing user-generated images and AI art.
+* [TailwindCSS](https://firebase.google.com/products/storage) - CSS Styling Framework.
 
 ## Installation
 
