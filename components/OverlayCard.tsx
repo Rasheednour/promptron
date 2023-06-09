@@ -6,9 +6,11 @@ import Image from "next/image";
 type Props = {
     isOpen: Boolean,
     onClose: (prompt?:Prompt) => void,
-    children: JSX.Element
+    children: JSX.Element,
+    overlayImage: string,
+    setOverlayImage: () => void
 }
-export function Overlay({isOpen, onClose, children}: Props) {
+export function Overlay({isOpen, onClose, children, overlayImage, setOverlayImage}: Props) {
   const [copied, setCopied] = useState("");
   const handleCopy = () => {
     setCopied(children.props.children);
@@ -47,6 +49,17 @@ export function Overlay({isOpen, onClose, children}: Props) {
               />
             </div>
             {children}
+            <div className="overlay_image">
+                {overlayImage && (
+                    <Image
+                    src={overlayImage}
+                    width={600}
+                    height={600}
+                    alt="midjourney user image"
+                    className="mt-3 mb-3"
+                  />
+                )}
+            </div>
           </div>
         </div>
       )}

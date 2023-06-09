@@ -15,9 +15,14 @@ type PlatformPrompts = {
 const PromptCardList = (props: CardListProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [overlayPrompt, setOverlayPrompt] = useState<string>();
+  const [overlayImage, setOverlayImage] = useState<string>("");
   const toggleOverlay = (prompt:Prompt) => {
     setOverlayPrompt(prompt.prompt);
     setIsOpen(!isOpen);
+    if (!isOpen) {
+      setOverlayImage("");
+    }
+    setOverlayImage(prompt.imageURL);
   };
   return (
     <div className=" prompt_layout">
@@ -30,8 +35,9 @@ const PromptCardList = (props: CardListProps) => {
           toggleOverlay={toggleOverlay}
         />
       ))}
-      <Overlay isOpen={isOpen} onClose={toggleOverlay}>
+      <Overlay isOpen={isOpen} onClose={toggleOverlay} overlayImage={overlayImage} setOverlayImage={setOverlayImage}>
         <h1>{overlayPrompt}</h1>
+        {}
       </Overlay>
     </div>
   );
