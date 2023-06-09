@@ -48,13 +48,13 @@ export function Overlay({isOpen, onClose, children, overlayImage, setOverlayImag
                 onClick={onClose}
               />
             </div>
-            {children}
+            <p className="overlay-prompt">{children.props.children}</p>
             <div className="overlay_image">
                 {overlayImage && (
                     <Image
                     src={overlayImage}
-                    width={600}
-                    height={600}
+                    width={700}
+                    height={700}
                     alt="midjourney user image"
                     className="mt-3 mb-3"
                   />

@@ -45,8 +45,19 @@ const PromptCard = (props: Props) => {
 
   return (
     
-    <div className={"prompt_card hover:cursor-pointer hover:bg-gray-100 " + (props.prompt.imageURL? 'h-fit' : 'h-48')} onClick={handleToggleOverlay}>
+    <div className={"prompt_card hover:cursor-pointer hover:bg-gray-100 relative " + (props.prompt.imageURL? 'h-fit' : 'h-48')} onClick={handleToggleOverlay}>
       
+      <div className="">
+      {props.prompt.imageURL && (
+        <Image
+          src={props.prompt.imageURL}
+          width={400}
+          height={400}
+          alt="midjourney user image"
+          className="mt-3 mb-3 w-full"
+        />
+      )}
+      </div>
       
       <div className="flex justify-between items-start gap-2 drop-shadow-md">
         <div className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
@@ -55,7 +66,7 @@ const PromptCard = (props: Props) => {
             alt="user_image"
             width={30}
             height={30}
-            className="rounded-full object-contain "
+            className="rounded-full object-contain"
           />
           <div className="flex flex-col">
             <h3 className="font-satoshi font-semibold text-gray-900 text-sm hover:underline " >
@@ -91,15 +102,7 @@ const PromptCard = (props: Props) => {
           />
         </div>
       </div>
-      {props.prompt.imageURL ? (
-        <Image
-          src={props.prompt.imageURL}
-          width={400}
-          height={400}
-          alt="midjourney user image"
-          className="mt-3 mb-3"
-        />
-      ) : (<p className="my-4 font-satoshi text-sm text-gray-700 line-clamp-3 select-none">
+      {!props.prompt.imageURL && (<p className="my-4 font-satoshi text-sm text-gray-700 line-clamp-3 select-none">
       {props.prompt.prompt}
     </p>)}
       
