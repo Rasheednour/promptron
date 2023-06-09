@@ -1,9 +1,9 @@
 import "@styles/globals.css";
 import Nav from "@components/Nav";
 import Provider from "@components/Provider";
-import { ReactNode } from 'react';
-import { Session } from 'next-auth';
-import dotenv from 'dotenv';
+import { ReactNode } from "react";
+import { Session } from "next-auth";
+import dotenv from "dotenv";
 dotenv.config();
 
 export const metadata = {
@@ -14,7 +14,6 @@ export const metadata = {
 interface RootLayoutProps {
   children: ReactNode;
   session: Session;
-
 }
 
 const RootLayout = ({ children, session }: RootLayoutProps) => {

@@ -6,7 +6,7 @@ import Overlay from "./OverlayCard";
 
 type CardListProps = {
   data: Prompt[];
-  handleTagClick: (tag:string) => void;
+  handleTagClick: (tag: string) => void;
 };
 type PlatformPrompts = {
   chatGPT: Prompt[];
@@ -16,7 +16,8 @@ const PromptCardList = (props: CardListProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [overlayPrompt, setOverlayPrompt] = useState<string>();
   const [overlayImage, setOverlayImage] = useState<string>("");
-  const toggleOverlay = (prompt:Prompt) => {
+  const toggleOverlay = (prompt?: Prompt) => {
+    if (!prompt) return;
     setOverlayPrompt(prompt.prompt);
     setIsOpen(!isOpen);
     if (!isOpen) {
@@ -26,7 +27,6 @@ const PromptCardList = (props: CardListProps) => {
   };
   return (
     <div className=" prompt_layout">
-      
       {props.data.map((prompt: Prompt) => (
         <PromptCard
           key={prompt._id.toString()}
@@ -35,7 +35,12 @@ const PromptCardList = (props: CardListProps) => {
           toggleOverlay={toggleOverlay}
         />
       ))}
-      <Overlay isOpen={isOpen} onClose={toggleOverlay} overlayImage={overlayImage} setOverlayImage={setOverlayImage}>
+      <Overlay
+        isOpen={isOpen}
+        onClose={toggleOverlay}
+        overlayImage={overlayImage}
+        setOverlayImage={setOverlayImage}
+      >
         <h1>{overlayPrompt}</h1>
         {}
       </Overlay>
@@ -53,18 +58,19 @@ const Feed = (props: Props) => {
   const [platform, setPlatform] = useState<Platform>("midjourney");
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
-
   };
-  
-  useEffect(() => {
-    if(!allPrompts) return;
-    const prompts = allPrompts[platform];
-    const filteredPrompts = prompts.filter((prompt)=> prompt.prompt.includes(searchText) || prompt.tag.includes(searchText) || prompt.creator.username.includes(searchText));
-    setFeedPrompts(filteredPrompts);
-  }, [searchText])
-  
 
-  
+  useEffect(() => {
+    if (!allPrompts) return;
+    const prompts = allPrompts[platform];
+    const filteredPrompts = prompts.filter(
+      (prompt) =>
+        prompt.prompt.includes(searchText) ||
+        prompt.tag.includes(searchText) ||
+        prompt.creator.username.includes(searchText)
+    );
+    setFeedPrompts(filteredPrompts);
+  }, [searchText]);
 
   // if a platform changes due to the user clicking on the toggle
   // platform button in the home page, filter the prompt feed
@@ -90,7 +96,7 @@ const Feed = (props: Props) => {
   }, []);
 
   // function to filter prompts based on clicked tag
-  const handleTagClick = (tag:string) => {
+  const handleTagClick = (tag: string) => {
     setSearchText(tag);
   };
   return (

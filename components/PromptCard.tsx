@@ -6,59 +6,61 @@ type Props = {
   prompt: Prompt;
   handleEdit?: (prompt: Prompt) => void;
   handleDelete?: (prompt: Prompt) => void;
-  handleTagClick: (tag: string) => void;
-  toggleOverlay: (prompt:Prompt) => void;
+  handleTagClick?: (tag: string) => void;
+  toggleOverlay?: (prompt: Prompt) => void;
 };
-
-
 
 const PromptCard = (props: Props) => {
   const [copied, setCopied] = useState("");
   const [liked, setLiked] = useState(false);
-  
+
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
-  const handleCopy = (e:React.MouseEvent<HTMLDivElement>) => {
+  const handleCopy = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     setCopied(props.prompt.prompt);
     navigator.clipboard.writeText(props.prompt.prompt);
     setTimeout(() => setCopied(""), 3000);
   };
-  const handleTagClick = (tag: string, e:React.MouseEvent<HTMLDivElement>) => {
+  const handleTagClick = (tag: string, e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
+    if (!props.handleTagClick) return;
     props.handleTagClick(tag);
   };
 
   // handle user clicking on the like prompt button
-  const handleLike = (e:React.MouseEvent<HTMLDivElement>) => {
+  const handleLike = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     setLiked(!liked);
-  }
+  };
 
   // handle user clicking on a text prompt card to enlarge it
   const handleToggleOverlay = () => {
+    if (!props.toggleOverlay) return;
     props.toggleOverlay(props.prompt);
-
-  }
-
+  };
 
   return (
-    
-    <div className={"prompt_card hover:cursor-pointer hover:bg-gray-100 relative " + (props.prompt.imageURL? 'h-fit' : 'h-48')} onClick={handleToggleOverlay}>
-      
+    <div
+      className={
+        "prompt_card hover:cursor-pointer hover:bg-gray-100 relative " +
+        (props.prompt.imageURL ? "h-fit" : "h-48")
+      }
+      onClick={handleToggleOverlay}
+    >
       <div className="">
-      {props.prompt.imageURL && (
-        <Image
-          src={props.prompt.imageURL}
-          width={400}
-          height={400}
-          alt="midjourney user image"
-          className="mt-3 mb-3 w-full"
-        />
-      )}
+        {props.prompt.imageURL && (
+          <Image
+            src={props.prompt.imageURL}
+            width={400}
+            height={400}
+            alt="midjourney user image"
+            className="mt-3 mb-3 w-full"
+          />
+        )}
       </div>
-      
+
       <div className="flex justify-between items-start gap-2 drop-shadow-md">
         <div className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
           <Image
@@ -69,7 +71,7 @@ const PromptCard = (props: Props) => {
             className="rounded-full object-contain"
           />
           <div className="flex flex-col">
-            <h3 className="font-satoshi font-semibold text-gray-900 text-sm hover:underline " >
+            <h3 className="font-satoshi font-semibold text-gray-900 text-sm hover:underline ">
               {props.prompt.creator.username}
             </h3>
             {/* <p className="font-inter text-sm text-grey-500">
@@ -77,7 +79,12 @@ const PromptCard = (props: Props) => {
             </p> */}
           </div>
         </div>
-        <div className="copy_btn hover:bg-gray-300" onClick={(e)=>{handleLike(e)}}>
+        <div
+          className="copy_btn hover:bg-gray-300"
+          onClick={(e) => {
+            handleLike(e);
+          }}
+        >
           <Image
             src={
               liked
@@ -89,7 +96,12 @@ const PromptCard = (props: Props) => {
             alt="copy-image"
           />
         </div>
-        <div className="copy_btn  hover:bg-gray-300" onClick={(e)=>{handleCopy(e)}}>
+        <div
+          className="copy_btn  hover:bg-gray-300"
+          onClick={(e) => {
+            handleCopy(e);
+          }}
+        >
           <Image
             src={
               copied === props.prompt.prompt
@@ -102,17 +114,18 @@ const PromptCard = (props: Props) => {
           />
         </div>
       </div>
-      {!props.prompt.imageURL && (<p className="my-4 font-satoshi text-sm text-gray-700 line-clamp-3 select-none">
-      {props.prompt.prompt}
-    </p>)}
-      
+      {!props.prompt.imageURL && (
+        <p className="my-4 font-satoshi text-sm text-gray-700 line-clamp-3 select-none">
+          {props.prompt.prompt}
+        </p>
+      )}
+
       <p
         className="font-inter text-sm text-blue-600 cursor-pointer hover:underline select-none inline-block"
         onClick={(e) => handleTagClick(props.prompt.tag, e)}
       >
         #{props.prompt.tag}
       </p>
-      
 
       {session?.user.id === props.prompt.creator._id.toString() &&
         pathName === "/profile" && (

@@ -57,7 +57,6 @@ const Nav = (props: Props) => {
     }
   };
 
-  
   return (
     <nav className="flex-between w-full mb-16 pt-3">
       <Link href="/" className="flex  flex-center">
@@ -68,7 +67,7 @@ const Nav = (props: Props) => {
           alt="PromptyDumpy logo"
           className="object-contain"
         />
-        
+
         <p className="logo_text">PromptyDumpty</p>
       </Link>
       {/* Desktop Navigation */}
