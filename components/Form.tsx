@@ -18,7 +18,7 @@ type Props = {
 };
 
 const Form = (props: Props) => {
-  const [platform, setPlatform] = useState("chatGPT");
+  const [platform, setPlatform] = useState("midjourney");
   const [image, setImage] = useState("");
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;

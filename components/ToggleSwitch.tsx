@@ -21,6 +21,7 @@ const ToggleSwitch = (props: Props) => {
         onChange={(e) => {
           handleToggle(e);
         }}
+        defaultChecked
       />
         <span className="border-2  font-satoshi font-semibold px-3 py-2 rounded-l-3xl text-white dark:bg-blue-500 border-gray-400 peer-checked:dark:bg-gray-300 peer-checked:border-0 peer-checked:text-gray-700 select-none text-center text-sm ">
           ChatGPT

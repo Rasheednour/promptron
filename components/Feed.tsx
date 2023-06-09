@@ -50,7 +50,7 @@ const Feed = (props: Props) => {
   // store all Prompts
   const [allPrompts, setAllPromps] = useState<PlatformPrompts>();
   // store AI platform
-  const [platform, setPlatform] = useState<Platform>("chatGPT");
+  const [platform, setPlatform] = useState<Platform>("midjourney");
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
 
