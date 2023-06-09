@@ -6,7 +6,7 @@ import Overlay from "./OverlayCard";
 
 type CardListProps = {
   data: Prompt[];
-  handleTagClick: () => void;
+  handleTagClick: (tag:string) => void;
 };
 type PlatformPrompts = {
   chatGPT: Prompt[];
@@ -51,7 +51,17 @@ const Feed = (props: Props) => {
   const [allPrompts, setAllPromps] = useState<PlatformPrompts>();
   // store AI platform
   const [platform, setPlatform] = useState<Platform>("chatGPT");
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {};
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchText(e.target.value);
+
+  };
+  
+  useEffect(() => {
+    if(!allPrompts) return;
+    const prompts = allPrompts[platform];
+    const filteredPrompts = prompts.filter((prompt)=> prompt.prompt.includes(searchText) || prompt.tag.includes(searchText) || prompt.creator.username.includes(searchText));
+    setFeedPrompts(filteredPrompts);
+  }, [searchText])
   
 
   
@@ -80,13 +90,15 @@ const Feed = (props: Props) => {
   }, []);
 
   // function to filter prompts based on clicked tag
-  const handleTagClick = () => {};
+  const handleTagClick = (tag:string) => {
+    setSearchText(tag);
+  };
   return (
     <section className="feed">
       <form className="relative w-full flex-center">
         <input
           type="text"
-          placeholder="Search for a tag or username"
+          placeholder="Search for a tag, prompt, or username"
           value={searchText}
           onChange={handleSearchChange}
           required

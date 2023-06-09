@@ -24,7 +24,8 @@
     margin: auto;
     z-index: 10;
     padding: 20px;
-    width: 600px;
+    max-width: 80vh;
+    max-height: 100vh;
     height: fit-content;
     border-radius: 0.5rem;
     border: solid 1px ;

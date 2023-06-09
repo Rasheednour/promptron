@@ -6,7 +6,7 @@ type Props = {
   prompt: Prompt;
   handleEdit?: (prompt: Prompt) => void;
   handleDelete?: (prompt: Prompt) => void;
-  handleTagClick: () => void;
+  handleTagClick: (tag: string) => void;
   toggleOverlay: (prompt:Prompt) => void;
 };
 
@@ -27,7 +27,7 @@ const PromptCard = (props: Props) => {
   };
   const handleTagClick = (tag: string, e:React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-    alert(`clicked on ${tag}`);
+    props.handleTagClick(tag);
   };
 
   // handle user clicking on the like prompt button
