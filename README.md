@@ -1,34 +1,69 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# PromptyDumpty
 
-## Getting Started
+PromptyDumpty is a web application designed to inspire creativity and facilitate the sharing of AI prompts for platforms like ChatGPT and Midjourney. Visitors can explore and share AI prompts, view prompts created by others, filter prompts based on the AI platform, and search for prompts using our intuitive search feature. Each prompt is tagged according to category, making it easy to find exactly what you're looking for.
 
-First, run the development server:
+## Features
+
+* Home Feed: Explore prompts created by other users.
+* Filter & Search: Filter the home feed based on AI platform and search for prompts using the search box.
+* Categories: Prompts are tagged according to category for easy browsing.
+* User Profiles: Visit user profiles and see their contributions to the PromptyDumpty community.
+* Google Authentication: Create an account with Google and start sharing your own prompts.
+* Create Prompts: Share your AI prompts with the world.
+* Upload Images: Attach AI-generated images or art to your prompts.
+* Interact: Like the prompts of other users and show your appreciation for their creativity.
+* Copy Button: Easily copy text prompts.
+
+## Technology Stack
+
+* [Next.js](https://nextjs.org/) - The React framework for production.
+* [React](https://reactjs.org/) - JavaScript library for building user interfaces.
+* [Next-Auth](https://next-auth.js.org/) - Complete open source authentication solution for Next.js applications.
+* [MongoDB](https://www.mongodb.com/) / [Mongoose](https://mongoosejs.com/) - Database management.
+* [Firebase Storage](https://firebase.google.com/products/storage) - For storing user-generated images and AI art.
+
+## Installation
+
+To run PromptyDumpty locally, you need to have Firebase and Google OAuth consent set up, as well as a MongoDB cluster for the backend.
+
+Clone the repo:
+
+```bash
+git clone https://github.com/<your-github-username>/promptydumpty.git
+```
+
+Change into the project directory:
+
+```bash
+cd promptydumpty
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Finally, start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Now the application should be running on [localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+For more detailed instructions on setup and configuration for Google OAuth, Firebase, and MongoDB, please refer to their respective official documentation.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Contributing
 
-## Learn More
+PromptyDumpty welcomes contributions! If you found a bug, want to propose a feature or feel the urge to correct my grammar, I would love to hear from you. Feel free to open an issue or create a pull request.
 
-To learn more about Next.js, take a look at the following resources:
+## License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+MIT
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Contact
 
-## Deploy on Vercel
+If you want to get in touch, you can reach out via [GitHub](https://github.com/<your-github-username>). 
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Happy Coding!
