@@ -2,12 +2,12 @@ import { useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
-
 type Props = {
   prompt: Prompt;
   handleEdit?: (prompt: Prompt) => void;
   handleDelete?: (prompt: Prompt) => void;
   handleTagClick: () => void;
+  toggleOverlay: (prompt:Prompt) => void;
 };
 
 
@@ -15,33 +15,39 @@ type Props = {
 const PromptCard = (props: Props) => {
   const [copied, setCopied] = useState("");
   const [liked, setLiked] = useState(false);
-  const [isModalOpen, setModalOpen] = useState(false);
+  
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
-  const handleCopy = () => {
+  const handleCopy = (e:React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
     setCopied(props.prompt.prompt);
     navigator.clipboard.writeText(props.prompt.prompt);
     setTimeout(() => setCopied(""), 3000);
   };
-  const handleTagClick = (tag: string) => {
+  const handleTagClick = (tag: string, e:React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
     alert(`clicked on ${tag}`);
   };
 
   // handle user clicking on the like prompt button
-  const handleLike = () => {
+  const handleLike = (e:React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
     setLiked(!liked);
   }
 
-  // handel user clicking on a text prompt card to enlarge it
-  const handleTextPromptClick = () => {
-    setModalOpen(true);
+  // handle user clicking on a text prompt card to enlarge it
+  const handleToggleOverlay = () => {
+    props.toggleOverlay(props.prompt);
+
   }
 
 
   return (
     
-    <div className={"prompt_card hover:cursor-pointer hover:bg-gray-100 " + (props.prompt.imageURL? 'h-fit' : 'h-52')} onClick={handleTextPromptClick}>
+    <div className={"prompt_card hover:cursor-pointer hover:bg-gray-100 " + (props.prompt.imageURL? 'h-fit' : 'h-48')} onClick={handleToggleOverlay}>
+      
+      
       <div className="flex justify-between items-start gap-2 drop-shadow-md">
         <div className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
           <Image
@@ -60,7 +66,7 @@ const PromptCard = (props: Props) => {
             </p> */}
           </div>
         </div>
-        <div className="copy_btn hover:bg-gray-300" onClick={handleLike}>
+        <div className="copy_btn hover:bg-gray-300" onClick={(e)=>{handleLike(e)}}>
           <Image
             src={
               liked
@@ -72,7 +78,7 @@ const PromptCard = (props: Props) => {
             alt="copy-image"
           />
         </div>
-        <div className="copy_btn  hover:bg-gray-300" onClick={handleCopy}>
+        <div className="copy_btn  hover:bg-gray-300" onClick={(e)=>{handleCopy(e)}}>
           <Image
             src={
               copied === props.prompt.prompt
@@ -99,7 +105,7 @@ const PromptCard = (props: Props) => {
       
       <p
         className="font-inter text-sm text-blue-600 cursor-pointer hover:underline select-none inline-block"
-        onClick={() => handleTagClick(props.prompt.tag)}
+        onClick={(e) => handleTagClick(props.prompt.tag, e)}
       >
         #{props.prompt.tag}
       </p>

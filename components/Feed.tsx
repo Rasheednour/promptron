@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 import PromptCard from "./PromptCard";
 import ToggleSwitch from "./ToggleSwitch";
+import Overlay from "./OverlayCard";
+
 type CardListProps = {
   data: Prompt[];
   handleTagClick: () => void;
@@ -11,15 +13,26 @@ type PlatformPrompts = {
   midjourney: Prompt[];
 };
 const PromptCardList = (props: CardListProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [overlayPrompt, setOverlayPrompt] = useState<string>();
+  const toggleOverlay = (prompt:Prompt) => {
+    setOverlayPrompt(prompt.prompt);
+    setIsOpen(!isOpen);
+  };
   return (
     <div className=" prompt_layout">
+      
       {props.data.map((prompt: Prompt) => (
         <PromptCard
           key={prompt._id.toString()}
           prompt={prompt}
           handleTagClick={props.handleTagClick}
+          toggleOverlay={toggleOverlay}
         />
       ))}
+      <Overlay isOpen={isOpen} onClose={toggleOverlay}>
+        <h1>{overlayPrompt}</h1>
+      </Overlay>
     </div>
   );
 };
@@ -33,6 +46,9 @@ const Feed = (props: Props) => {
   // store AI platform
   const [platform, setPlatform] = useState<Platform>("chatGPT");
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {};
+  
+
+  
 
   // if a platform changes due to the user clicking on the toggle
   // platform button in the home page, filter the prompt feed
