@@ -3,7 +3,7 @@ import Prompt from "@models/prompt";
 import { NextRequest } from "next/server";
 // GET (read prompt)
 
-export const GET = async (request:Request|NextRequest, { params }) => {
+export const GET = async (request:Request|NextRequest, { params }: {params: {[id:string]:string}}) => {
   try {
     await connectToDB();
     const prompt = await Prompt.findById(params.id).populate("creator");
@@ -19,7 +19,7 @@ export const GET = async (request:Request|NextRequest, { params }) => {
 };
 
 // PATCH (update prompt)
-export const PATCH = async (request:Request|NextRequest, { params }) => {
+export const PATCH = async (request:Request|NextRequest, { params } : {params: {[id:string]:string}}) => {
   const { prompt, tag } = await request.json();
 
   try {
@@ -40,7 +40,7 @@ export const PATCH = async (request:Request|NextRequest, { params }) => {
   }
 };
 // DELETE (delete prompt)
-export const DELETE = async (request:Request|NextRequest, { params }) => {
+export const DELETE = async (request:Request|NextRequest, { params } : {params: {[id:string]:string}}) => {
   try {
     await connectToDB();
 
