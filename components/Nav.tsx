@@ -64,11 +64,11 @@ const Nav = (props: Props) => {
           src={"/assets/images/logo2.svg"}
           width={80}
           height={80}
-          alt="PromptyDumpy logo"
+          alt="Promptron logo"
           className="object-contain"
         />
 
-        <p className="logo_text">PromptyDumpty</p>
+        <p className="logo_text">Promptron</p>
       </Link>
       {/* Desktop Navigation */}
 

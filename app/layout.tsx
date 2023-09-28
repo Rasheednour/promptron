@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const metadata = {
-  title: "PromptyDumpty",
+  title: "Promptron",
   description: "Find & Share AI Prompts",
 };
 

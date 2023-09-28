@@ -11,7 +11,7 @@ const Home = (props: Props) => {
         <span className="blue_gradient text-center">AI-Powered Prompts</span>
       </h1>
       <p className="desc text-center">
-        PromptyDumpty is an open community for sharing and discovering AI
+        Promptron is an open community for sharing and discovering AI
         prompts to be used in a variety of AI products like ChatGPT and
         Midjourney
       </p>
