@@ -1,13 +1,13 @@
-# PromptyDumpty
+# Promptron
 
-PromptyDumpty is a web application designed to inspire creativity and facilitate the sharing of AI prompts for platforms like ChatGPT and Midjourney. Visitors can explore and share AI prompts, view prompts created by others, filter prompts based on the AI platform, and search for prompts using our intuitive search feature. Each prompt is tagged according to category, making it easy to find exactly what you're looking for.
+Promptron is a web application designed to inspire creativity and facilitate the sharing of AI prompts for platforms like ChatGPT and Midjourney. Visitors can explore and share AI prompts, view prompts created by others, filter prompts based on the AI platform, and search for prompts using our intuitive search feature. Each prompt is tagged according to category, making it easy to find exactly what you're looking for.
 
 ## Features
 
 * Home Feed: Explore prompts created by other users.
 * Filter & Search: Filter the home feed based on AI platform and search for prompts using the search box.
 * Categories: Prompts are tagged according to category for easy browsing.
-* User Profiles: Visit user profiles and see their contributions to the PromptyDumpty community.
+* User Profiles: Visit user profiles and see their contributions to the Promptron community.
 * Google Authentication: Create an account with Google and start sharing your own prompts.
 * Create Prompts: Share your AI prompts with the world.
 * Upload Images: Attach AI-generated images or art to your prompts.
@@ -25,18 +25,18 @@ PromptyDumpty is a web application designed to inspire creativity and facilitate
 
 ## Installation
 
-To run PromptyDumpty locally, you need to have Firebase and Google OAuth consent set up, as well as a MongoDB cluster for the backend.
+To run Promptron locally, you need to have Firebase and Google OAuth consent set up, as well as a MongoDB cluster for the backend.
 
 Clone the repo:
 
 ```bash
-git clone https://github.com/<your-github-username>/promptydumpty.git
+git clone https://github.com/Rasheednour/promptron.git
 ```
 
 Change into the project directory:
 
 ```bash
-cd promptydumpty
+cd promptron
 ```
 
 Install dependencies:
@@ -57,7 +57,7 @@ For more detailed instructions on setup and configuration for Google OAuth, Fire
 
 ## Contributing
 
-PromptyDumpty welcomes contributions! If you found a bug, want to propose a feature or feel the urge to correct my grammar, I would love to hear from you. Feel free to open an issue or create a pull request.
+Promptron welcomes contributions! If you found a bug, want to propose a feature or feel the urge to correct my grammar, I would love to hear from you. Feel free to open an issue or create a pull request.
 
 ## License
 
